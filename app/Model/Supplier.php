@@ -12,4 +12,14 @@ class Supplier extends Model
     {
         return $this->hasMany('App\Model\Product');
     }
+
+    public function balance()
+    {
+        return $this->hasMany('App\Model\Balance');
+    }
+
+    public function balanceTransaction()
+    {
+        return $this->hasMany('App\Model\BalanceTransaction');
+    }
 }

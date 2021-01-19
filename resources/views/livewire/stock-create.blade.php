@@ -81,7 +81,7 @@
                         class="form-control @error('kode') is-invalid @enderror" 
                         placeholder="Jumlah"
 
-                        id="validasi-kode" aria-describedby="umpan-balik-validasi-kode"
+                        id="jumlah" aria-describedby="umpan-balik-validasi-kode"
                     >   
                 </div>
             </div>

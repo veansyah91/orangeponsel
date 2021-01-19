@@ -11,4 +11,9 @@ class InvoiceController extends Controller
     {
         return view('admin.daily.invoice.index');
     }
+
+    public function balance()
+    {
+        return view('admin.daily.invoice.balance');
+    }
 }

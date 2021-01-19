@@ -168,6 +168,9 @@ return [
         App\Providers\SupplierHelperServiceProvider::class,
         App\Providers\InvoiceHelperServiceProvider::class,
         App\Providers\InterOutletHelperServiceProvider::class,
+        App\Providers\UserHelperServiceProvider::class,
+        App\Providers\OutletHelperServiceProvider::class,
+        App\Providers\RoleHelperServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,6 +241,9 @@ return [
         'Supplier' => App\Helpers\SupplierHelper::class,
         'Invoice' => App\Helpers\InvoiceHelper::class,
         'InterOutlet' => App\Helpers\InterOutletHelper::class,
+        'User' => App\Helpers\UserHelper::class,
+        'Outlet' => App\Helpers\OutletHelper::class,
+        'Role' => App\Helpers\RoleHelper::class,
 
     ],
 

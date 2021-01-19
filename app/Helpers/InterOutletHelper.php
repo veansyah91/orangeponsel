@@ -10,7 +10,6 @@ class InterOutletHelper{
 
     public static function getDetail($pihak1, $pihak2)
     {
-        // dd($pihak2);
         return $data = InterOutlet::where('pihak_1', $pihak1)
                                     ->where('pihak_2', $pihak2)
                                     ->orderBy('updated_at', 'desc')

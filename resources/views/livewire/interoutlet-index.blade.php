@@ -5,6 +5,8 @@
                 <div class="card-header h3">
                     <div class="row">
                         <div class="col-md-4 my-auto">Transaksi Antar Outlet</div>
+                        
+                        @role('SUPER ADMIN')
                         <div class="col-md-4 offset-md-4 text-right">
                             <select class="custom-select" wire:model="selectOutlet" wire:click="changeOutlet()">
                                 @foreach ($outlets as $outlet)
@@ -12,6 +14,8 @@
                                 @endforeach
                             </select>
                         </div>
+                        @endrole
+
                     </div>
                 </div>
             

@@ -2,18 +2,21 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
+use App\Model\Stock;
 
-use App\Model\Customer;
+use App\Model\Income;
 use App\Model\Outlet;
 use App\Model\Invoice;
-use App\Model\InvoiceDetail;
-use App\Model\Stock;
-use App\Model\PaymentStatus;
-use App\Model\Income;
+use App\Model\Customer;
+use Livewire\Component;
+use App\Model\OutletUser;
 use App\Model\InterOutlet;
+use App\Helpers\RoleHelper;
 
+use App\Model\InvoiceDetail;
+use App\Model\PaymentStatus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceIndex extends Component
 {
@@ -37,10 +40,19 @@ class InvoiceIndex extends Component
 
     public function mount()
     {
-        $this->outlets = Outlet::all();
-        $this->selectOutlet = $this->outlets[0]->id;
+        $user = Auth::user();
+        $roleUser = RoleHelper::getRole($user->id);
 
-        $nomorNota = Invoice::all()->last();
+        if ($roleUser->name == 'SUPER ADMIN') {
+            # code...
+            $this->outlets = Outlet::all();
+            $this->selectOutlet = $this->outlets[0]->id;
+        } else {
+            $outletUser = OutletUser::where('user_id', $user->id)->first();
+            $this->selectOutlet = $outletUser->outlet_id;
+        }
+
+        $nomorNota = Invoice::where('outlet_id', $this->selectOutlet)->get()->last();
         $this->nomorNota = $nomorNota ? $nomorNota->no_nota + 1 : 1;
 
         $this->editInvoice = false;

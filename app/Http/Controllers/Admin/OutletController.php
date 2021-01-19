@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class OutletController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['role:SUPER ADMIN']);
+    }
+
     public function index(){
         return view('admin.outlet.index');
     }

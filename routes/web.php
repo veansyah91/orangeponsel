@@ -22,6 +22,8 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/account/users', 'Admin\UserController@index')->name('user.index');
     Route::get('/account/roles', 'Admin\RoleController@index')->name('user.role');
+    Route::get('/change-password','User\UserController@changePassword')->name('change-password');
+    Route::patch('/change-password','User\UserController@updatePassword')->name('edit-password');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -37,9 +39,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/master/produk', 'Admin\ProductController@index')->name('master.product');
 
     Route::get('/daily/invoice', 'Admin\InvoiceController@index')->name('daily.invoice');
+    Route::get('/daily/balance', 'Admin\InvoiceController@balance')->name('daily.balance');
     Route::get('/daily/hutang', 'Admin\DebtController@index')->name('daily.debt');
     
-    Route::get('/stok', 'Admin\StockController@index')->name('stok.index');
+    Route::get('/stok/item', 'Admin\StockController@index')->name('stok.index');
+    Route::get('/stok/balance', 'Admin\StockController@balance')->name('stok.balance');
 
     Route::get('/outlets-cashflow', 'Admin\StockController@index')->name('outlets-cashflow.index');
 });

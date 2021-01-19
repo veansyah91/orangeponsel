@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeptPeymentsTable extends Migration
+class CreateDeptPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateDeptPeymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dept_peyments');
+        Schema::dropIfExists('dept_payments');
     }
 }

@@ -27,4 +27,14 @@ class Outlet extends Model
     {
         return $this->belongsToMany('App\Model\User');
     }
+
+    public function balance()
+    {
+        return $this->hasMany('App\Model\Balance');
+    }
+
+    public function balanceTransaction()
+    {
+        return $this->hasMany('App\Model\BalanceTransaction');
+    }
 }
