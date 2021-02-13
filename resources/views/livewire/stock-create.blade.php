@@ -1,19 +1,21 @@
 <div>
     <div class="card-body">
         <form wire:submit.prevent="store">
-            <div class="form-group row">
-                <label for="outlet" class="col-sm-2 col-form-label">Nama Toko</label>
-                <div class="col-sm-2">
-                    <select class="custom-select" id="inputGroupOutlets" wire:model='outletId'>
-                        @foreach ($outlets as $outlet)
-                            <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
-                        @endforeach
-                    </select>
-                    @error('outlet')
-                        <span id="umpan-balik-validasi-outlet" class="invalid-feedback">Silakan isi Nama Toko</span>
-                    @enderror
+            @role('SUPER ADMIN')
+                <div class="form-group row">
+                    <label for="outlet" class="col-sm-2 col-form-label">Nama Toko</label>
+                    <div class="col-sm-2">
+                        <select class="custom-select" id="inputGroupOutlets" wire:model='outletId'>
+                            @foreach ($outlets as $outlet)
+                                <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
+                            @endforeach
+                        </select>
+                        @error('outlet')
+                            <span id="umpan-balik-validasi-outlet" class="invalid-feedback">Silakan isi Nama Toko</span>
+                        @enderror
+                    </div>
                 </div>
-            </div>
+            @endrole
             <div class="form-group row">
                 <label for="kode" class="col-sm-2 col-form-label">Kode/IMEI</label>
                 <div class="col-sm-4">

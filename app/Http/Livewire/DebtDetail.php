@@ -24,7 +24,10 @@ class DebtDetail extends Component
 
     public function render()
     {
-        return view('livewire.debt-detail');
+        $sisa = $this->sisa;
+        return view('livewire.debt-detail',[
+            'sisa' => $sisa
+        ]);
     }
 
     public function makePayment(){
@@ -41,6 +44,7 @@ class DebtDetail extends Component
         ]);
 
         $payment = PaymentStatus::where('invoice_id', $this->invoiceId)->first();
+        
         $this->sisa = $payment->sisa * -1 - InvoiceHelper::getDebtPaymentTotal($this->invoiceId);
             
         $income = Income::create([
@@ -50,6 +54,7 @@ class DebtDetail extends Component
         ]);
 
         $this->jumlahBayar = $this->sisa;
+        $this->emit('getDebtPayment');
     }
 
     public function paymentDelete($id){

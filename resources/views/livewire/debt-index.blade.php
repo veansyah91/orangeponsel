@@ -6,13 +6,15 @@
                 <div class="card-header h3">
                     <div class="row">
                         <div class="col-md-4 my-auto">Hutang</div>
-                        <div class="col-md-4 offset-md-4 text-right">
-                            <select class="custom-select" wire:model="selectOutlet">
-                                @foreach ($outlets as $outlet)
-                                    <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @role('SUPER ADMIN')
+                            <div class="col-md-4 offset-md-4 text-right">
+                                <select class="custom-select" wire:model="selectOutlet">
+                                    @foreach ($outlets as $outlet)
+                                        <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endrole
                     </div>
                 </div>
             
@@ -43,13 +45,17 @@
                     <hr>
 
                     @if ($remains->isNotEmpty())
+
                         @foreach ($remains as $remain)
+
                             @if (Invoice::getDebtPaymentTotal($remain->invoice_id) != $remain->sisa * -1 && !$remain->outlet_id)
                                 <livewire:debt-detail :invoiceId="$remain->invoice_id" :paymentId="$remain->id" :customerName="$remain->nama" :sisa="$remain->sisa"/>
                             @endif
                             
                         @endforeach
+
                     @else
+                    
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <i>Tidak Ada Hutang</i>

@@ -18,7 +18,11 @@ class InvoiceHelper {
     }
 
     public static function getDebtPaymentTotal($invoiceId) {
-        return $payments = DebtPayment::where('invoice_id', $invoiceId)->sum('bayar');
+        
+        $payment = DebtPayment::where('invoice_id', $invoiceId)->get()->sum('bayar');
+        // dd($payment);
+        return $payment ? $payment : 0;
+
     }
 
     public static function getDetail($id){
@@ -27,6 +31,7 @@ class InvoiceHelper {
 
     public static function getDetailInvoice($id)
     {
-        return $jumlah = InvoiceDetail::where('invoice_id', $id)->sum('jual');
+        return $detail = InvoiceDetail::where('invoice_id', $id)->get();
+        
     }
 }  

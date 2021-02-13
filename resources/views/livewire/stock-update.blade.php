@@ -5,6 +5,7 @@
 
     <div class="card-body">
         <form wire:submit.prevent="update">
+            @role('SUPER ADMIN')
             <div class="form-group row">
                 <input type="hidden" wire:model="stockId">
                 <label for="outlet" class="col-sm-2 col-form-label">Nama Toko</label>
@@ -19,6 +20,7 @@
                     @enderror
                 </div>
             </div>
+            @endrole
             <div class="form-group row">
                 <label for="kode" class="col-sm-2 col-form-label">Kode/IMEI</label>
                 <div class="col-sm-4">

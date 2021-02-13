@@ -59,7 +59,7 @@
                         <label for="inputNominal{{ $paymentId }}" class="sr-only">Nominal</label>
                         <input type="number" class="form-control text-right" id="inputNominal{{ $paymentId }}" placeholder="nominal" min="0" wire:model="jumlahBayar">
                     </div>
-                    <button type="submit" class="btn btn-info btn-sm mb-2">Proses</button>
+                    <button type="submit" class="btn btn-info btn-sm mb-2" @click="bayar = false">Proses</button>
                 </form>
                 
             </div>

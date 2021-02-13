@@ -6,6 +6,7 @@ use App\Model\Customer;
 
 class CustomerHelper {
     public static function getName($id) {
-        return $customer= Customer::where('id', $id)->first();        
+        return $customer= Customer::find($id);        
+        // dd($id);
     }
 }

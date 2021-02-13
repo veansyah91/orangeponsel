@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Model\Product;
-use App\Model\Outlet;
 use App\Model\Stock;
+use App\Model\Outlet;
+use App\Model\Product;
+use Livewire\Component;
+use App\Model\OutletUser;
+use App\Helpers\RoleHelper;
+use Illuminate\Support\Facades\Auth;
 
 class StockCreate extends Component
 {
@@ -50,8 +53,19 @@ class StockCreate extends Component
     {
         $this->showProductInputList = false;
         $this->jumlah = 1;
-        $this->outlets = Outlet::all();
-        $this->outletId = $this->outlets[0]->id;
+
+        $user = Auth::user();
+        $roleUser = RoleHelper::getRole($user->id);
+
+        if ($roleUser->name == 'SUPER ADMIN') {
+            # code...
+            $this->outlets = Outlet::all();
+            $this->outletId = $this->outlets[0]->id;
+        } else {
+            $outletUser = OutletUser::where('user_id', $user->id)->first();
+            $this->outletId = $outletUser->outlet_id;
+        }
+        
         $this->tipe = '';
         $this->kode = '';
     }
@@ -67,6 +81,7 @@ class StockCreate extends Component
 
     public function store()
     {
+        // dd($this->outletId);
         date_default_timezone_set('Asia/Jakarta');
 
         $this->validate([

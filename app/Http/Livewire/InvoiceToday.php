@@ -11,6 +11,7 @@ class InvoiceToday extends Component
 {   
     public $outletId;
     public $tanggal;
+    public $showInvoiceDetail;
 
     protected $listeners = [
         'getOutlet' => 'showOutlet',
@@ -23,6 +24,7 @@ class InvoiceToday extends Component
 
         date_default_timezone_set('Asia/Jakarta');
         $this->tanggal = Date('Y-m-d');
+        $this->showInvoiceDetail = false;
     }
 
 
@@ -30,7 +32,7 @@ class InvoiceToday extends Component
     {
         
         $data = Invoice::where('updated_at', 'like', $this->tanggal . '%')->where('outlet_id', $this->outletId)->get();
-
+        
         return view('livewire.invoice-today',[
             'data' => $data
         ]);
@@ -44,5 +46,16 @@ class InvoiceToday extends Component
     public function handleNewInvoice()
     {
 
+    }
+
+    public function showDetail($id)
+    {
+        $this->showInvoiceDetail = true;
+        $this->emit('getDetail', $id);
+    }
+
+    public function showInvoice()
+    {
+        $this->showInvoiceDetail = false;
     }
 }

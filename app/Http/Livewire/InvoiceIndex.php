@@ -94,8 +94,7 @@ class InvoiceIndex extends Component
 
         // cek status pembayaran
         $status = $invoice ? PaymentStatus::where('invoice_id', $invoice->id)->first() : '';
-        // dd($status);
-        // dd($status);
+        
         if ($status) {
             $this->bayar = $status->total + $status->sisa;
         }
