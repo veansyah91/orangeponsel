@@ -49,7 +49,7 @@
                                                     </td>
                                                     <td>
                                                         @if ($detail->invoice_id)
-                                                            Rp. {{ number_format(Invoice::getDetailInvoice($detail->invoice_id),0,",",".") }}
+                                                            Rp. {{ number_format(Invoice::getDetailInvoicePayment($detail->invoice_id)->sisa * -1,0,",",".") }}
                                                         @else
                                                             Rp. {{ number_format($detail->jumlah,0,",",".") }} 
                                                             <button class="btn btn-sm btn-link" wire:click="updateCredit({{ $detail->id }})">
@@ -141,7 +141,8 @@
                                                     </td>
                                                     <td>
                                                         @if ($detail->invoice_id)
-                                                            Rp. {{ number_format(Invoice::getDetailInvoice($detail->invoice_id),0,",",".") }}
+                                                            Rp. {{ number_format(Invoice::getDetailInvoicePayment($detail->invoice_id)->sisa * -1,0,",",".") }}
+                                                            
                                                         @else
                                                             Rp. {{ number_format($detail->jumlah,0,",",".") }}
                                                         @endif

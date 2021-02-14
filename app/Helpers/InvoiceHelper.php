@@ -1,11 +1,12 @@
 <?php
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\DB;
 use App\Model\Income;
-use App\Model\DebtPayment;
 use App\Model\Invoice;
+use App\Model\DebtPayment;
 use App\Model\InvoiceDetail;
+use App\Model\PaymentStatus;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceHelper {
     public static function getTotal($invoiceId) {
@@ -29,9 +30,9 @@ class InvoiceHelper {
         return $invoice = Invoice::find($id);
     }
 
-    public static function getDetailInvoice($id)
+    public static function getDetailInvoicePayment($id)
     {
-        return $detail = InvoiceDetail::where('invoice_id', $id)->get();
+        return $detail = PaymentStatus::where('invoice_id', $id)->first();
         
     }
 }  

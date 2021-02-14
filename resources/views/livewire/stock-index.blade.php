@@ -59,18 +59,35 @@
                                             <td class="text-center" >{{ Category::getName($d->category_id)->nama }}</td>
                                             <td class="text-center" >{{ $d->tipe}}</td>
                                             <td class="text-center" >{{ $d->kode }}</td>
-                                            <td class="text-center" >{{ $d->jumlah }}</td>
+                                            <td class="text-center" >
+                                                {{ $d->jumlah }}
+                                            </td>
                                             <td class="text-center" >{{ Date('d F Y', strtotime($d->updated_at)) }}</td>
                                             <td class="text-center">
-                                                <button wire:click="getOutlet({{ $d->id }})" class="btn btn-sm btn-success">Ubah</button>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Hapus
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <button class="dropdown-item active" wire:click="destroy({{ $d->id }})">Oke</button>
+                                                @role('SUPER ADMIN')
+                                                    <button wire:click="getOutlet({{ $d->id }})" class="btn btn-sm btn-success">Ubah</button>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Hapus
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <button class="dropdown-item active" wire:click="destroy({{ $d->id }})">Oke</button>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @endrole
+
+                                                @if ($selectOutlet == $d->outlet_id)                                                    
+                                                    <button wire:click="getOutlet({{ $d->id }})" class="btn btn-sm btn-success">Ubah</button>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Hapus
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <button class="dropdown-item active" wire:click="destroy({{ $d->id }})">Oke</button>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
@@ -85,8 +102,6 @@
                         </table>
                         {{ $data->links() }}
                     </div>
-                
-                    
                 </div>
             </div>
         </div>

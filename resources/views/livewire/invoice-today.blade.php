@@ -38,7 +38,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $d->no_nota }}</td>
                             <td class="text-center">{{ $d->customer->nama }}</td>
-                            <td class="text-center">Rp. {{ number_format(Invoice::getTotal($d->id),0,",",".") }}</td>
+                            <td class="text-center">
+                                Rp. {{ number_format(Invoice::getTotal($d->id),0,",",".") }}
+                            </td>
                             <td class="text-center">{{ substr($d->updated_at,11)  }}</td>
                             <td>
                                 <button class="btn btn-sm btn-success" wire:click="showDetail({{ $d->id }})">Detail</button>

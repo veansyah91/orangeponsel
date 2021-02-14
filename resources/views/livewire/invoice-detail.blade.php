@@ -36,12 +36,14 @@
                     </tr>
                     <tr>
                         <td class="font-weight-bold">Total</td>
-                        <td class="font-weight-bold">Rp. {{ number_format($jumlah,0,",",".") }}</td>
+                        <td class="font-weight-bold">: Rp. {{ number_format($jumlah,0,",",".") }}</td>
 
                     </tr>
                 @endforeach    
             @else
-                Data Kosong
+                <div wire:loading class="text-center">
+                    <i>Processing Detail Invoice...</i>                    
+                </div>
             @endif
             
             

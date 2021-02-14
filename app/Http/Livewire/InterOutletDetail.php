@@ -70,6 +70,7 @@ class InterOutletDetail extends Component
                                     ->where('pihak_2', $this->selectOutlet)
                                     ->orderBy('updated_at', 'desc')
                                     ->get()->sum('jumlah');
+                                    // dd($sumCredits);
 
         return view('livewire.inter-outlet-detail',[
                     'credits' => $credits,

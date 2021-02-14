@@ -82,6 +82,8 @@ class InvoiceCreate extends Component
                                         ->take(5)
                                         ->get();
 
+                                        // dd($this->outletId);
+
         $this->customerInputLists = Customer::where('outlet_id','!=', $this->outletId)->orWhere('outlet_id', null)->where('nama', 'like', '%' . $this->customer . '%')->skip(0)->take(5)->get();
         return view('livewire.invoice-create',[
             'customerInputLists' => $this->customerInputLists,
@@ -183,7 +185,7 @@ class InvoiceCreate extends Component
         $this->jumlah = $this->jumlah > $stock ->jumlah? $stock->jumlah : $this->jumlah;
 
         // cek ada atau tidak nota berdasarkan nota
-        $invoice = Invoice::where('no_nota', $this->nomorNota)->first();
+        $invoice = Invoice::where('outlet_id', $this->outletId)->where('no_nota', $this->nomorNota)->first();
 
         if ($invoice) {
             $invoiceUpdate = Invoice::where('id', $invoice->id)->update(['outlet_id' => $this->outletId,'customer_id' => $this->customerId]);

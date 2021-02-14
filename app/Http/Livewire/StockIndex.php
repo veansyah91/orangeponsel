@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use Livewire\WithPagination; 
-
-use Illuminate\Support\Facades\DB;
 use App\Model\Stock;
+use App\Model\Outlet;
+
+use Livewire\Component;
+use App\Model\OutletUser;
+use App\Helpers\RoleHelper;
+use Livewire\WithPagination; 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class StockIndex extends Component
 {
@@ -20,29 +24,40 @@ class StockIndex extends Component
     public $showUpdate;
     public $stocks;
 
+    public $selectOutlet;
+
     protected $listeners = [
         "stockStored" => "handleStore",
         "stockUpdated" => "handleUpdate",
         "cancelUpdateStock" => "handleCancelUpdate"
     ];
 
+    public function mount()
+    {
+        $user = Auth::user();
+        $roleUser = RoleHelper::getRole($user->id);
+
+        if ($roleUser->name == 'SUPER ADMIN') {
+            # code...
+            $outlets = Outlet::all();
+            $this->selectOutlet = $this->outlets[0]->id;
+        } else {
+            $outletUser = OutletUser::where('user_id', $user->id)->first();
+            $this->selectOutlet = $outletUser->outlet_id;
+        }
+    }
+
     public function render()
     {
-        $stocks =  $this->search == '' ? DB::table('stocks')->join('outlets','outlets.id','=','stocks.outlet_id')
-                                                    ->join('products','products.id','=','stocks.product_id')                                                    
-                                                    ->select('stocks.id','stocks.updated_at','stocks.jumlah','outlets.nama as nama_outlet','products.tipe', 'products.kode','products.category_id')
-                                                    ->orderByDesc('jumlah')
-                                                    ->paginate($this->paginate) 
-                                         :
-                                         DB::table('stocks')->join('outlets','outlets.id','=','stocks.outlet_id')
+        $stocks = DB::table('stocks')->join('outlets','outlets.id','=','stocks.outlet_id')
                                                     ->join('products','products.id','=','stocks.product_id')
                                                     ->where('products.tipe','like', '%' . $this->search . '%')
                                                     ->orWhere('products.kode','like', '%' . $this->search . '%')
-                                                    ->select('stocks.id','stocks.updated_at','stocks.jumlah','outlets.nama as nama_outlet','products.tipe', 'products.kode','products.category_id')
-                                                    ->orderByDesc('jumlah')
+                                                    ->select('stocks.id','stocks.updated_at','stocks.jumlah','outlets.nama as nama_outlet','products.tipe', 'products.kode','products.category_id','stocks.outlet_id')
+                                                    ->orderByDesc('stocks.jumlah','products.kode')
                                                     ->paginate($this->paginate)  ;
 
-
+        // dd($this->selectOutlet);
         return view('livewire.stock-index',[
             'data' => $stocks
         ]);
