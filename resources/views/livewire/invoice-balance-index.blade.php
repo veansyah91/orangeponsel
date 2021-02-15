@@ -49,13 +49,27 @@
                             </thead>
                 
                             <tbody>
+                                @php
+                                    $totalModal = 0;
+                                    $totalJual = 0;
+                                @endphp
                                 @foreach ($data as $d)
                                     <tr>
                                         <td class="text-center">{{ substr($d->updated_at,11) }}</td>
                                         <td class="text-center">{{ $d->supplier->nama }}</td>
                                         <td class="text-center">{{ $d->nomorId }}</td>
-                                        <td class="text-center">Rp. {{ number_format($d->modal,0,",",".") }}</td>
-                                        <td class="text-center">Rp. {{ number_format($d->jual,0,",",".") }}</td>
+                                        <td class="text-center">
+                                            @php
+                                               $totalModal += $d->modal; 
+                                            @endphp
+                                            Rp. {{ number_format($d->modal,0,",",".") }}
+                                        </td>
+                                        <td class="text-center">
+                                            Rp. {{ number_format($d->jual,0,",",".") }}
+                                            @php
+                                                $totalJual += $d->jual;
+                                            @endphp
+                                        </td>
                                         <td class="text-center">{{ $d->keterangan }}</td>
                                         <td>
                                             <div x-data="{ deleteShow: false, deleteHide: true }">
@@ -94,11 +108,29 @@
                                     </tr>
                                     
                                 @endforeach
+                                <tr>
+                                    <td colspan="3">
+                                        <strong>Total</strong>    
+                                    </td>
+                                    <td class="text-right font-weight-bold">
+                                        Rp. {{ number_format($totalModal,0,",",".") }}
+                                    </td>
+                                    <td class="text-right font-weight-bold">
+                                        Rp. {{ number_format($totalJual,0,",",".") }}
+                                    <td class="text-right font-weight-bold">
+                                        Laba : Rp. {{ number_format($totalJual-$totalModal,0,",",".") }}
+                                    </td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                         
                         {{ $data->links() }}
                         
+                    </div>
+
+                    <div class="card-footer">
+                        <livewire:invoice-balance-remain :outletId='$outletId'/>                        
                     </div>
                 
                 </div>

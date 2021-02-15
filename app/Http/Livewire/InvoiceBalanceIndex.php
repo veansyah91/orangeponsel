@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Model\Outlet;
-use Livewire\Component;
+use App\Model\Supplier;
 
-use Livewire\WithPagination; 
+use Livewire\Component;
 
 use App\Model\OutletUser;
 use App\Helpers\RoleHelper;
+use Livewire\WithPagination; 
 use App\Model\BalanceTransaction;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,6 +54,7 @@ class InvoiceBalanceIndex extends Component
         $this->tanggal = Date('Y-m-d');
 
         $data = BalanceTransaction::where('outlet_id', $this->outletId)->where('updated_at', 'like', $this->tanggal . '%')->paginate(10);
+        $servers = Supplier::all();
 
         return view('livewire.invoice-balance-index',[
             'outlets' => $this->outlets,
@@ -68,6 +70,7 @@ class InvoiceBalanceIndex extends Component
     public function showTransactionDetail()
     {
         $this->updateTransaction = false;
+        $this->emit('getRemains');
     }
 
     public function deleteConfirmation($id)

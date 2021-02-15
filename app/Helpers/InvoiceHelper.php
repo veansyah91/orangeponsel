@@ -2,10 +2,12 @@
 namespace App\Helpers;
 
 use App\Model\Income;
+use App\Model\Balance;
 use App\Model\Invoice;
 use App\Model\DebtPayment;
 use App\Model\InvoiceDetail;
 use App\Model\PaymentStatus;
+use App\Model\BalanceTransaction;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceHelper {
@@ -34,5 +36,14 @@ class InvoiceHelper {
     {
         return $detail = PaymentStatus::where('invoice_id', $id)->first();
         
+    }
+
+    public static function getBalanceBalance($outletId, $supplierId)
+    {
+        $totalBalanceCredit = Balance::where('outlet_id', $outletId)->where('supplier_id', $supplierId)->get()->sum('jumlah');
+
+        $totalBalanceDebit = BalanceTransaction::where('outlet_id', $outletId)->where('supplier_id', $supplierId)->get()->sum('modal');
+
+        return $totalBalanceCredit - $totalBalanceDebit;
     }
 }  
