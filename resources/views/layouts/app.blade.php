@@ -91,7 +91,15 @@
                                 </div>
 
                             </li>
+
+                            @role('SUPER ADMIN')
+                                <li class="nav-item{{ request()->is('credit-partners') ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('credit-partners.index') }}">Mitra Kredit</a>
+                                </li>
+                            @endrole
                         </ul>
+
+                        
                     @endauth
                     
 

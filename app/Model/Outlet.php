@@ -37,4 +37,9 @@ class Outlet extends Model
     {
         return $this->hasMany('App\Model\BalanceTransaction');
     }
+
+    public function creditCustomer()
+    {
+        $this->hasMany('App\Model\CreditCustomer');
+    }
 }
