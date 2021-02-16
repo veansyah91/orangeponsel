@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CreditPartner extends Model
 {
-    protected $fillable = ['nama_mitra','alamat'];
+    protected $fillable = ['nama_mitra','alamat','alias'];
 
     public function creditAplication()
     {

@@ -16,8 +16,22 @@
                     @enderror
                 </div>
             </div>
+            
             <div class="form-group row">
-                <label for="nama" class="col-sm-2 col-form-label">Alamat</label>
+                <label for="alias" class="col-sm-2 col-form-label">Alias</label>
+                <div class="col-sm-10"> 
+                    <textarea 
+                        wire:model="alias" 
+                        class="form-control" @error('alias') is-invalid @enderror"
+                        id="validasi-alias" 
+                        rows="1" 
+                        aria-describedby="umpan-balik-validasi-alias"
+                    ></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-10"> 
                     <textarea 
                         wire:model="alamat" 

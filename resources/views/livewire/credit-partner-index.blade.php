@@ -19,7 +19,7 @@
                     @endif
                 
                     @if ($showUpdate)
-                        <livewire:credit-partner-update />
+                        
                         <div class="container mt-3">
                             <div class="row">
                                 <div class="col">
@@ -27,6 +27,9 @@
                                 </div>
                             </div>                            
                         </div>
+                        
+                        <livewire:credit-partner-update />
+
                     @else
                         <livewire:credit-partner-create />
                     @endif
@@ -37,6 +40,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Nama Mitra</th>
+                                    <th class="text-center">Alias</th>
                                     <th class="text-center">Alamat</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
@@ -47,10 +51,26 @@
                                     @foreach ($data as $d)
                                         <tr>
                                             <td class="text-center">{{ $d->nama_mitra }}</td>
+                                            <td class="text-center">{{ $d->alias }}</td>
                                             <td class="text-center">{{ $d->alamat }}</td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-success" wire:click='updateCreditPartner({{ $d->id }})'>ubah</button>
-                                                <button class="btn btn-sm btn-danger">hapus</button>
+                                                <div x-data="{ hapus: false, general: true }">
+                                                    <div x-show='general'>
+                                                        <button class="btn btn-sm btn-success" wire:click='updateCreditPartner({{ $d->id }})'>ubah</button>
+                                                        <button class="btn btn-sm btn-danger" @click="hapus=true;general=false">hapus</button>
+                                                    </div>
+                                                
+                                                    <div x-show="hapus" @click.away="hapus=false">
+                                                        Apakah Anda Yakin?
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <button class="btn btn-sm btn-secondary" @click="hapus=false;general=true">Tidak</button>
+                                                                <button class="btn btn-sm btn-danger" wire:click="delete({{ $d->id }})">Ya</button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

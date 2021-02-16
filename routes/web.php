@@ -48,5 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/outlets-cashflow', 'Admin\StockController@index')->name('outlets-cashflow.index');
 
     Route::get('/credit-partners','Admin\CreditPartnerController@index')->name('credit-partners.index');
+    Route::get('/credit-partner/partner={partner}/proposal','Admin\CreditPartnerController@proposal')->name('credit-partner.proposal');
+    Route::get('/credit-partner/partner={partner}/invoice','Admin\CreditPartnerController@invoice')->name('credit-partner.invoice');
 });
 

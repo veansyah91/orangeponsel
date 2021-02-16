@@ -10,7 +10,8 @@ class CreditPartnerIndex extends Component
     public $showUpdate;
 
     protected $listeners = [
-        'getCreditPartner' => 'showCreditPartner'
+        'getCreditPartner' => 'showCreditPartner',
+        'getCreditPartnerStatus' => 'handleCreditPartnerUpdate'
     ];
 
     public function mount()
@@ -34,10 +35,23 @@ class CreditPartnerIndex extends Component
     public function updateCreditPartner($id)
     {
         $this->showUpdate = true;
+        $this->emit('getCreditPartnerUpdate', $id);
     }
 
     public function cancelUpdate()
     {
         $this->showUpdate = false;    
+    }
+
+    public function delete($id)
+    {
+        $delete = CreditPartner::find($id)->delete();
+        session()->flash('success', "Mitra Berhasil Dihapus");
+    }
+
+    public function handleCreditPartnerUpdate()
+    {
+        session()->flash('success', "Mitra Berhasil Diubah");
+        $this->showUpdate = false; 
     }
 }

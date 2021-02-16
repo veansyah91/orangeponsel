@@ -7,7 +7,7 @@ use App\Model\CreditPartner;
 
 class CreditPartnerCreate extends Component
 {
-    public $nama, $alamat;
+    public $nama, $alamat, $alias;
 
     public function render()
     {
@@ -20,9 +20,10 @@ class CreditPartnerCreate extends Component
             'nama' => 'required',
             'alamat' => 'required',
         ]);
-
+        
         $creditPartner = CreditPartner::create([
             'nama_mitra' => strtoupper($this->nama),
+            'alias' => strtoupper($this->alias),
             'alamat' => strtoupper($this->alamat)
         ]);
 
@@ -36,5 +37,6 @@ class CreditPartnerCreate extends Component
     private function resetInput(){
         $this->nama = null;
         $this->alamat = null;
+        $this->alias = null;
     }
 }

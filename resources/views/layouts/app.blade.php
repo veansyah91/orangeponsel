@@ -97,6 +97,20 @@
                                     <a class="nav-link" href="{{ route('credit-partners.index') }}">Mitra Kredit</a>
                                 </li>
                             @endrole
+
+                            @foreach (CreditPartner::getPartner() as $partner)
+                                <li class="nav-item dropdown{{ request()->is('credit-partner/*') ? ' active' :'' }}">
+                                    <a class="nav-link dropdown-toggle" href="#" id="harianDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ $partner->alias ? $partner->alias : $partner->nama_partner }}
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="harianDropdownMenuLink">
+                                        <a class="dropdown-item{{ request()->is('credit-partner/proposal') ? ' active' : '' }}" href="{{ route('credit-partner.proposal',['partner' => $partner->id]) }}">Pengajuan Kredit</a>                                   
+                                        <a class="dropdown-item{{ request()->is('credit-partner/invoice') ? ' active' : '' }}" href="{{ route('credit-partner.invoice', ['partner' => $partner->id]) }}">Pengambilan Barang</a>                                 
+                                    </div>
+                                </li>
+                            @endforeach
+                                                        
                         </ul>
 
                         
