@@ -1,7 +1,6 @@
 <div>
-{{-- 
     <div class="card-body">
-        <form wire:submit.prevent="update">
+        <form wire:submit.prevent="store">
             <div class="row">
                 <div class="col">
                     <div class="form-group">
@@ -45,13 +44,12 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="submit" class="text-white">Simpan</label>
+                        <label for="submit" class="text-white">Submit</label>
                         <input type='submit' class="form-control bg-primary text-white" id="submit" value="Simpan">
                     </div>
-                </div> 
+                </div>
             </div>
             
           </form>
     </div>
-     --}}
 </div>

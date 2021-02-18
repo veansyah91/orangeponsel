@@ -27,7 +27,7 @@
                         
                     </div>
                 
-                    @if ($showUpdate)
+                    {{-- @if ($showUpdate)
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -41,16 +41,27 @@
                     @else
                         
                         buat
-                        <livewire:invoice-balance-create :outletId="$outletId"/>
+                        <livewire:invoice-balance-create />
 
-                    @endif
-                    <button wire:click="editTransaction()">Edit</button>
+                    @endif --}}
+                    {{-- <button wire:click="editTransaction()">Edit</button> --}}
 
                     @if ($showUpdate)
-                        edit
-                        <button wire:click="cancel()">batal edit</button>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <button wire:click="cancelUpdate()" class="btn btn-sm btn-success">batal edit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <livewire:balance-transaction-update :outletId="$outletId"/>
+
                     @else
-                        ubah
+
+                        <livewire:balance-transaction-create :outletId="$outletId"/>
+
                     @endif
 
                     <div class="card-body">
@@ -75,7 +86,7 @@
                                 @endphp
 
                                 @foreach ($data as $d)
-                                    <tr wire:key="{{ $loop->index }}">
+                                    <tr>
                                         <td class="text-center">{{ substr($d->updated_at,11) }}</td>
                                         <td class="text-center">{{ $d->supplier->nama }}</td>
                                         <td class="text-center">{{ $d->nomorId }}</td>
@@ -147,12 +158,12 @@
                             </tbody>
                         </table>
                         
-                        {{ $data->links() }}
+                        {{-- {{ $data->links() }} --}}
                         
                     </div>
 
                     <div class="card-footer">
-                        <livewire:invoice-balance-remain :outletId='$outletId'/>                        
+                        <livewire:balance-remain :outletId='$outletId'/>                        
                     </div>
                 
                 </div>

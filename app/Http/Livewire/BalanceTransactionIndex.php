@@ -13,7 +13,7 @@ use Livewire\WithPagination;
 use App\Model\BalanceTransaction;
 use Illuminate\Support\Facades\Auth;
 
-class InvoiceBalanceIndex extends Component
+class BalanceTransactionIndex extends Component
 {
     use WithPagination;
 
@@ -23,11 +23,10 @@ class InvoiceBalanceIndex extends Component
 
     public $user, $roleUser, $outletUser, $outletId, $outlets;
 
-    public $delete;
-
     protected $listeners = [
         'getTransactionDetail' => 'handleShowTransactionDetail',
-        'getCancelUpdate' => 'handleCancelTransactionUpdate'
+        'getCancelUpdate' => 'handleCancelTransactionUpdate',
+        'finishUpdateTransaction' => 'handleFinishUpdateTransaction'
     ];
 
     public function mount()
@@ -48,17 +47,15 @@ class InvoiceBalanceIndex extends Component
             $this->outletId = $this->outletUser->outlet_id;
         }
     }
-
+    
     public function render()
     {
         date_default_timezone_set('Asia/Jakarta');
         $this->tanggal = Date('Y-m-d');
 
         $data = BalanceTransaction::where('outlet_id', $this->outletId)->where('updated_at', 'like', $this->tanggal . '%')->paginate(10);
-        $servers = Supplier::all();
 
-        return view('livewire.invoice-balance-index',[
-            // 'outlets' => $this->outlets,
+        return view('livewire.balance-transaction-index', [
             'data' => $data
         ]);
     }
@@ -74,27 +71,24 @@ class InvoiceBalanceIndex extends Component
         $this->emit('getRemains');
     }
 
-    public function cancel()
-    {
-        $this->showUpdate = false;
-    }
-
     public function deleteConfirmation($id)
     {
         $delete = BalanceTransaction::where('id',$id)->delete();
     }
 
+    public function cancelUpdate()
+    {
+        $this->showUpdate = false;
+    }
+
     public function editTransaksiSaldo($id)
     {
         $this->showUpdate = true;
-        // $this->emit('getTransaction', $id);        
+        $this->emit('updateTransaksiSaldo', $id);
     }
 
-    public function editTransaction()
+    public function handleFinishUpdateTransaction()
     {
-        $this->showUpdate = !$this->showUpdate;
-        $this->nilai = 2;
+        $this->showUpdate = false;
     }
-
-   
 }

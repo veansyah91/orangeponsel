@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Model\BalanceTransaction;
 use Illuminate\Support\Facades\DB;
 
-class InvoiceBalanceRemain extends Component
+class BalanceRemain extends Component
 {
     public $outletId;
 
@@ -23,11 +23,11 @@ class InvoiceBalanceRemain extends Component
     {
         $servers = DB::table('balances')
                                 ->join('suppliers', 'balances.supplier_id', '=', 'suppliers.id')
-                                // ->where('balances.outlet_id', $this->outletId)
+                                ->where('balances.outlet_id', $this->outletId)
                                 ->select('balances.supplier_id','suppliers.nama')
                                 ->distinct()
                                 ->get();
-        return view('livewire.invoice-balance-remain', [
+        return view('livewire.balance-remain', [
             'servers' => $servers
         ]);
     }

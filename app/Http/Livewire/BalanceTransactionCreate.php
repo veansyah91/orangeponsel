@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Model\BalanceTransaction;
 use Illuminate\Support\Facades\DB;
 
-class InvoiceBalanceCreate extends Component
+class BalanceTransactionCreate extends Component
 {
     public $outletId, $supplierId, $suppliers, $modal, $jual, $keterangan, $nomorId;
 
@@ -23,13 +23,12 @@ class InvoiceBalanceCreate extends Component
     public function render()
     {
         $servers = DB::table('balances')
-                                ->join('suppliers', 'balances.supplier_id', '=', 'suppliers.id')
-                                ->where('balances.outlet_id', $this->outletId)
-                                ->select('balances.supplier_id','suppliers.nama')
-                                ->distinct()
-                                ->get();
-                                
-        return view('livewire.invoice-balance-create',[
+                    ->join('suppliers', 'balances.supplier_id', '=', 'suppliers.id')
+                    ->where('balances.outlet_id', $this->outletId)
+                    ->select('balances.supplier_id','suppliers.nama')
+                    ->distinct()
+                    ->get();
+        return view('livewire.balance-transaction-create', [
             'servers' => $servers
         ]);
     }
@@ -53,7 +52,6 @@ class InvoiceBalanceCreate extends Component
         $this->resetInput();
         $this->emit('getTransactionDetail');
     }
-
 
     public function resetInput()
     {

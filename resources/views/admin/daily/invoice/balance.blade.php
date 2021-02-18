@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <livewire:invoice-balance-index />
+    <livewire:balance-transaction-index />
 </div>
 
 @endsection

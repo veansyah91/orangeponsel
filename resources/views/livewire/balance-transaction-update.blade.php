@@ -1,5 +1,4 @@
 <div>
-{{-- 
     <div class="card-body">
         <form wire:submit.prevent="update">
             <div class="row">
@@ -36,7 +35,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="server">Server</label>
-                        <select class="form-control" id="outletId" wire:model="supplierId" required>
+                        <select class="form-control" id="supplierId" wire:model="supplierId" required>
                             @foreach ($servers as $server)
                                 <option value="{{ $server->supplier_id }}">{{ $server->nama }}</option>    
                             @endforeach
@@ -45,13 +44,15 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="submit" class="text-white">Simpan</label>
-                        <input type='submit' class="form-control bg-primary text-white" id="submit" value="Simpan">
+                        <label for="submit" class="text-white">Submit</label>
+                        <input type='submit' class="form-control bg-primary text-white" id="submit" value="Ubah">
                     </div>
-                </div> 
+                </div>
             </div>
             
           </form>
     </div>
-     --}}
+</div>
+<div>
+    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
 </div>
