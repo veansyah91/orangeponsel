@@ -103,10 +103,15 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="harianDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ $partner->alias ? $partner->alias : $partner->nama_partner }}
                                     </a>
-                                    
+                                    @php
+                                        $linkCustomer = 'credit-partner/partner=' . $partner->id .'/customer';
+                                        $linkProposal = 'credit-partner/partner=' . $partner->id .'/proposal';
+                                        $linkInvoice = 'credit-partner/partner=' . $partner->id .'/invoice';
+                                    @endphp
                                     <div class="dropdown-menu" aria-labelledby="harianDropdownMenuLink">
-                                        <a class="dropdown-item{{ request()->is('credit-partner/proposal') ? ' active' : '' }}" href="{{ route('credit-partner.proposal',['partner' => $partner->id]) }}">Pengajuan Kredit</a>                                   
-                                        <a class="dropdown-item{{ request()->is('credit-partner/invoice') ? ' active' : '' }}" href="{{ route('credit-partner.invoice', ['partner' => $partner->id]) }}">Pengambilan Barang</a>                                 
+                                        <a class="dropdown-item{{ request()->is($linkCustomer) ? ' active' : '' }}" href="{{ route('credit-partner.customer',['partner' => $partner->id]) }}">Pelanggan Kredit</a>                                   
+                                        <a class="dropdown-item{{ request()->is($linkProposal) ? ' active' : '' }}" href="{{ route('credit-partner.proposal',['partner' => $partner->id]) }}">Pengajuan Kredit</a>                                   
+                                        <a class="dropdown-item{{ request()->is($linkInvoice) ? ' active' : '' }}" href="{{ route('credit-partner.invoice', ['partner' => $partner->id]) }}">Pengambilan Barang</a>                                 
                                     </div>
                                 </li>
                             @endforeach

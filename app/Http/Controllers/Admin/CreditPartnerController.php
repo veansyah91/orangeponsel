@@ -13,6 +13,11 @@ class CreditPartnerController extends Controller
         return view('admin.credit.credit-partner');
     }
 
+    public function customer($partner)
+    {
+        return view('admin.credit.credit-customer',['partner' => $partner]);
+    }
+
     public function proposal($partner)
     {
         return view('admin.credit.credit-application',['partner' => $partner]);
