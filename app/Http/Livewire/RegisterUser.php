@@ -7,18 +7,19 @@ use App\User;
 use App\Model\Outlet;
 use Livewire\Component;
 use App\Model\OutletUser;
+use App\Model\CreditSales;
 use App\Helpers\RoleHelper;
+use App\Model\CreditPartner;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterUser extends Component
 {
-    public $name, $email, $password, $outlet, $role, $roleUser, $user, $outletUser;
+    public $name, $email, $password, $outlet, $role, $roleUser, $user, $outletUser, $partner;
 
     public function mount(){
         $this->resetInput();
-
     }
 
     public function render()
@@ -28,9 +29,12 @@ class RegisterUser extends Component
                     Role::where('name', '<>', 'SUPER ADMIN')->get();
                     
         $outlets = Outlet::all();
+
+        $partners = CreditPartner::all();
         return view('livewire.register-user',[
             'roles' => $roles,
-            'outlets' => $outlets
+            'outlets' => $outlets,
+            'partners' => $partners
         ]);
     }
 
@@ -56,10 +60,21 @@ class RegisterUser extends Component
         $role = $user->assignRole($this->role);
 
         if ($this->role != 'SUPER ADMIN') {
-            $outletUser = OutletUser::create([
-                'user_id' => $user->id,
-                'outlet_id' => $this->outlet
-            ]);
+            if ($this->outlet) {
+                $outletUser = OutletUser::create([
+                    'user_id' => $user->id,
+                    'outlet_id' => $this->outlet
+                ]);
+            }
+
+            if ($this->partner) {
+                $creditSales = CreditSales::create([
+                    'user_id' => $user->id,
+                    'partner_id' => $this->partner
+                ]);
+            }
+            
+
         }        
 
         $this->resetInput();
@@ -82,6 +97,17 @@ class RegisterUser extends Component
         $this->role = $this->roleUser->name == "SUPER ADMIN" ?
                         Role::first()->name :    
                         $this->roleUser->name;     
-                        
+             
+    }
+
+    public function selectOutlet()
+    {
+        $this->partner = '';
+    }
+
+    public function selectPartner()
+    {
+
+        $this->outlet = '';
     }
 }

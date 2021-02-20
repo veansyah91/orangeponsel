@@ -10,6 +10,11 @@ class CreditPartner extends Model
 
     public function creditAplication()
     {
-        $this->hasMany('App\Model\CreditAplication');
+        return $this->hasMany('App\Model\CreditAplication');
+    }
+
+    public function user()
+    {
+        return $this->hasMany('App\Model\CreditSales');
     }
 }

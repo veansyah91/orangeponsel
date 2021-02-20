@@ -19,6 +19,13 @@
                     @endif
                 
                     @if ($showUpdate)
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-success btn-sm" wire:click="cancelUpdate()">Batal Ubah Data</button>
+                                </div>
+                            </div>
+                        </div>
                         <livewire:credit-customer-update />
                     @elseif ($showCreate)
                         <div class="card-body">
@@ -40,25 +47,91 @@
                     
                 
                     <div class="card-body">
+
+                        <div class="row justify-content-between">
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <label for="paginate" class="col-sm-3 col-form-label mr-n3">Tampilkan</label>
+                                    <select class="col-sm-2 form-control" id="paginate" wire:model="paginate">
+                                        <option>5</option>
+                                        <option>10</option>
+                                        <option>20</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="search" wire:model="search" placeholder="Cari...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <table class="table table-responsive">
                             <thead>
-                                <tr>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">Nama Pelanggan Kredit</th>
-                                    <th class="text-center">No KTP (NIK)</th>
-                                    <th class="text-center">No KK</th>
-                                    <th class="text-center">Jenis Kelamin</th>
-                                    <th class="text-center">Alamat</th>
-                                    <th class="text-center">No HP</th>
-                                    <th class="text-center">Aksi</th>
+                                <tr class="align-middle">
+                                    <th class="text-center align-middle">Nama Pelanggan Kredit</th>
+                                    <th class="text-center align-middle">No KTP (NIK)</th>
+                                    <th class="text-center align-middle">No KK</th>
+                                    <th class="text-center align-middle">Jenis Kelamin</th>
+                                    <th class="text-center align-middle">Alamat</th>
+                                    <th class="text-center align-middle">No HP</th>
+                                    <th class="text-center align-middle">Outlet</th>
+                                    <th class="text-center align-middle">Aksi</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-
+                                @if ($data->isNotEmpty())
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($data as $d)
+                                        <tr>
+                                            <td>{{ $d->nama }}</td>
+                                            <td>{{ $d->no_ktp }}</td>
+                                            <td>{{ $d->no_kk }}</td>
+                                            <td>{{ $d->jenis_kelamin }}</td>
+                                            <td>{{ $d->alamat }}</td>
+                                            <td>{{ $d->no_hp }}</td>
+                                            <td>{{ $d->outlet->nama }}</td>
+                                            <td>
+                                                <div x-data="{ hapus: false, general: true }">
+                                                    <div x-show='general'>
+                                                        <button class="btn btn-sm btn-success" wire:click='update({{ $d->id }})'>ubah</button>
+                                                        <button class="btn btn-sm btn-danger" @click="hapus=true;general=false">hapus</button>
+                                                    </div>
+                                                
+                                                    <div x-show="hapus" @click.away="hapus=false">
+                                                        Apakah Anda Yakin?
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <button class="btn btn-sm btn-secondary" @click="hapus=false;general=true">Tidak</button>
+                                                                <button class="btn btn-sm btn-danger" @click="hapus=false;general=true" wire:click="delete({{ $d->id }})">Ya</button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else 
+                                    <tr>
+                                        <td colspan="9">
+                                            <i>Data Konsumen Belum Diinput</i>
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                {{ $data->links() }}
+                            </div>
+                        </div>
                         
                     </div>
                     @endif

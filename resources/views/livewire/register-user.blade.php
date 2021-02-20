@@ -58,17 +58,33 @@
                         </div>
 
                         @role('SUPER ADMIN')
-                        <div class="form-group row">
-                            <label for="outlet" class="col-md-4 col-form-label text-md-right">{{ __('Outlet') }}</label>
+                            <div class="form-group row">
+                                <label for="outlet" class="col-md-4 col-form-label text-md-right">Outlet</label>
 
-                            <div class="col-md-6">
-                                <select id="inputState" class="form-control" name="outlet" wire:model="outlet">
-                                    @foreach ($outlets as $outlet)
-                                        <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col-md-6">
+                                    <select id="inputState" class="form-control" name="outlet" wire:model="outlet" wire:click="selectOutlet()">
+                                        <option>-- Pilih Outlet --</option>
+                                        @foreach ($outlets as $outlet)
+                                            <option value="{{ $outlet->id }}">{{ $outlet->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+
+                            @if ($partners->isNotEmpty())
+                                <div class="form-group row">
+                                    <label for="partner" class="col-md-4 col-form-label text-md-right">Mitra Kredit</label>
+                                    <div class="col-md-6">
+                                        <select id="inputState" class="form-control" name="partner" wire:model="partner" wire:click="selectPartner()">
+                                            <option>-- Pilih Mitra Kredit --</option>
+                                            @foreach ($partners as $partner)
+                                                <option value="{{ $partner->id }}">{{ $partner->nama_mitra }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
+
                         @endrole
 
                         <div class="form-group row">

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Model\OutletUser;
+use App\Model\CreditPartner;
 use Illuminate\Support\Facades\DB;
 
 class UserHelper {
@@ -10,5 +11,10 @@ class UserHelper {
     {
         return $outlet = OutletUser::where('user_id', $userId)->get();
         
+    }
+
+    public static function getCreditSales($id)
+    {
+        return $sales = CreditPartner::find($id);
     }
 }

@@ -40,6 +40,6 @@ class Outlet extends Model
 
     public function creditCustomer()
     {
-        $this->hasMany('App\Model\CreditCustomer');
+        return $this->hasMany('App\Model\CreditCustomer');
     }
 }

@@ -37,11 +37,15 @@ class UserIndex extends Component
                     DB::table('users')
                         ->join('outlet_users','outlet_users.user_id','users.id')
                         ->where('outlet_users.outlet_id', $outletUser->outlet_id)
-                        ->get()
-                        ;
+                        ->get();
+
+        $partners = DB::table('users')
+                        ->join('credit_sales','credit_sales.user_id','=','users.id')
+                        ->get();
                     
         return view('livewire.user-index',[
-            'users' => $users
+            'users' => $users,
+            'partners' => $partners
         ]);
     }
 
