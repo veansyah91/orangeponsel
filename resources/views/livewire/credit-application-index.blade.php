@@ -19,29 +19,53 @@
                     @endif
                 
                     @if ($showUpdate)
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-success btn-sm" wire:click="cancelUpdate()">Batal Ubah Data</button>
+                                </div>
+                            </div>
+                        </div>
                         <livewire:credit-partner-update />
+                    @elseif($showCreate)
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-success btn-sm" wire:click="cancelCreate()">Batal Tambah Data</button>
+                                </div>
+                            </div>
+                        </div>
+                        <livewire:credit-application-create />
                     @else
-                        <livewire:credit-partner-create />
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary" wire:click="create()">Tambah Data</button>
+                                </div>
+                            </div>
+                        </div>  
+                
+                        <div class="card-body">
+                            
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Nama Mitra</th>
+                                        <th class="text-center">Alias</th>
+                                        <th class="text-center">Alamat</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                    
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div>
                     @endif
-                
-                    <div class="card-body">
-                        
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Nama Mitra</th>
-                                    <th class="text-center">Alias</th>
-                                    <th class="text-center">Alamat</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                        
-                    </div>
+
+                    
                     
                 </div>
             </div>

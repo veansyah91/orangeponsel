@@ -6,6 +6,7 @@ use Faker\Factory;
 use App\Model\Outlet;
 use Livewire\Component;
 use App\Helpers\RoleHelper;
+use App\Helpers\UserHelper;
 use App\Model\CreditCustomer;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +21,10 @@ class CreditCustomerCreate extends Component
 
         $this->outlets = Outlet::all();
 
-        if ($roleUser->name == 'SUPER ADMIN') {
+        if ($roleUser->name == 'SUPER ADMIN' || $roleUser->name == 'SALES') {
             $this->outlet = $this->outlets[0]->id;
+        } else {
+            $this->outlet = UserHelper::getOutletUser($user->id)->outlet_id;
         }
     }
 

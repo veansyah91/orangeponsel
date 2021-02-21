@@ -98,23 +98,49 @@
                                             <td>{{ $d->no_hp }}</td>
                                             <td>{{ $d->outlet->nama }}</td>
                                             <td>
-                                                <div x-data="{ hapus: false, general: true }">
-                                                    <div x-show='general'>
-                                                        <button class="btn btn-sm btn-success" wire:click='update({{ $d->id }})'>ubah</button>
-                                                        <button class="btn btn-sm btn-danger" @click="hapus=true;general=false">hapus</button>
+                                                @role("SUPER ADMIN")
+                                                    <div x-data="{ hapus: false, general: true }">
+                                                        <div x-show='general'>
+                                                            <button class="btn btn-sm btn-success" wire:click='update({{ $d->id }})'>ubah</button>
+                                                            <button class="btn btn-sm btn-danger" @click="hapus=true;general=false">hapus</button>
+                                                        </div>
+                                                    
+                                                        <div x-show="hapus" @click.away="hapus=false">
+                                                            Apakah Anda Yakin?
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <button class="btn btn-sm btn-secondary" @click="hapus=false;general=true">Tidak</button>
+                                                                    <button class="btn btn-sm btn-danger" @click="hapus=false;general=true" wire:click="delete({{ $d->id }})">Ya</button>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     </div>
+                                                @endrole
                                                 
-                                                    <div x-show="hapus" @click.away="hapus=false">
-                                                        Apakah Anda Yakin?
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <button class="btn btn-sm btn-secondary" @click="hapus=false;general=true">Tidak</button>
-                                                                <button class="btn btn-sm btn-danger" @click="hapus=false;general=true" wire:click="delete({{ $d->id }})">Ya</button>
+                                                @if (User::getOutletUser(Auth::user()->id))
+                                                    @if (User::getOutletUser(Auth::user()->id)->outlet_id == $d->outlet_id)
+                                                        <div x-data="{ hapus: false, general: true }">
+                                                            <div x-show='general'>
+                                                                <button class="btn btn-sm btn-success" wire:click='update({{ $d->id }})'>ubah</button>
+                                                                <button class="btn btn-sm btn-danger" @click="hapus=true;general=false">hapus</button>
+                                                            </div>
+                                                        
+                                                            <div x-show="hapus" @click.away="hapus=false">
+                                                                Apakah Anda Yakin?
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <button class="btn btn-sm btn-secondary" @click="hapus=false;general=true">Tidak</button>
+                                                                        <button class="btn btn-sm btn-danger" @click="hapus=false;general=true" wire:click="delete({{ $d->id }})">Ya</button>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
-                                                        
-                                                    </div>
-                                                </div>
+                                                    @endif
+                                                @endif
+                                                
+                                                
                                             </td>
                                         </tr>
                                     @endforeach

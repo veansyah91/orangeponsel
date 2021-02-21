@@ -58,8 +58,8 @@
                         <small class="form-text text-danger">Silakan Isi Nomor HP dengan Benar</small>
                     @enderror
 
-                    @role('SUPER ADMIN')
-                        <div class="form-group">
+                    @role('SUPER ADMIN||SALES')
+                        <div class="form-group mt-2">
                             <label for="outlet">Outlet Pengajuan</label>
                             <select class="form-control" id="outlet" wire:model="outlet">
                                 @foreach ($outlets as $outlet)
@@ -68,7 +68,8 @@
                             </select>
                         </div>
                     @endrole
-                    <button type="submit" class="btn btn-primary" >Simpan</button>
+
+                    <button type="submit" class="btn btn-primary mt-3" >Simpan</button>
                 </form>
             </div>  
         </div>

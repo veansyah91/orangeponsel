@@ -6,14 +6,16 @@ use App\User;
 use App\Model\Outlet;
 use Livewire\Component;
 use App\Model\OutletUser;
+use App\Model\CreditSales;
 use App\Helpers\RoleHelper;
+use App\Model\CreditPartner;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterEdit extends Component
 {
-    public $name, $email, $password, $outlet, $role, $roleUser, $user, $userId, $outletUser;
+    public $name, $email, $password, $outlet, $role, $roleUser, $user, $userId, $outletUser, $partner;
 
     protected $listeners = [
         'editUser' => 'showUser'
@@ -29,9 +31,11 @@ class RegisterEdit extends Component
                     Role::where('name', '<>', 'SUPER ADMIN')->get();
         
         $outlets = Outlet::all();
+        $partners = CreditPartner::all();
         return view('livewire.register-edit',[
             'outlets' => $outlets,
-            'roles' => $roles
+            'roles' => $roles,
+            'partners' => $partners
         ]);
     }
 
@@ -48,7 +52,14 @@ class RegisterEdit extends Component
         $this->email = $user->email;
 
         $outletUser = OutletUser::where('user_id', $user->id)->first();
-        $this->outlet = $outletUser->outlet_id;
+        if ($outletUser) {
+            $this->outlet = $outletUser->outlet_id;
+        }
+
+        $sales = CreditSales::where('user_id', $userId)->first();
+        if ($sales) {
+            $this->partner = $sales->partner_id;
+        }
 
         $this->role = RoleHelper::getRole($user->id)->name;
     }
@@ -77,7 +88,11 @@ class RegisterEdit extends Component
 
         if ($this->role != 'SUPER ADMIN') {
             $outletUser = OutletUser::where('user_id', $user->id)->update([
-                'outlet_id' => $this->outlet
+                'outlet_id' => $this->outlet,
+            ]);
+
+            $partner = CreditSales::where('user_id', $user->id)->update([
+                'partner_id' => $this->partner,
             ]);
         } 
 
