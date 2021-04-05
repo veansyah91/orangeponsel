@@ -172,6 +172,7 @@ return [
         App\Providers\OutletHelperServiceProvider::class,
         App\Providers\RoleHelperServiceProvider::class,
         App\Providers\CreditPartnerHelperServiceProvider::class,
+        App\Providers\ProductHelperServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -246,6 +247,7 @@ return [
         'Outlet' => App\Helpers\OutletHelper::class,
         'Role' => App\Helpers\RoleHelper::class,
         'CreditPartner' => App\Helpers\CreditPartnerHelper::class,
+        'Product' => App\Helpers\ProductHelper::class,
 
     ],
 

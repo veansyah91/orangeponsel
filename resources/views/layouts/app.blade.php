@@ -44,53 +44,55 @@
                                 </li>
                             @endrole
 
-                            <li class="nav-item{{ request()->is('inter-outlet') ? ' active' : '' }}">
-                                <a class="nav-link" href="{{ route('inter-outlet.index') }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
-                                    </svg>
-                                </a>
-                            </li>
+                            @role('SUPER ADMIN|ADMIN|FRONT LINER')
+                                <li class="nav-item{{ request()->is('inter-outlet') ? ' active' : '' }}">
+                                    <a class="nav-link" href="{{ route('inter-outlet.index') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                                        </svg>
+                                    </a>
+                                </li>
 
-                            <li class="nav-item dropdown{{ request()->is('master/*') ? ' active' :'' }}">
-                                <a class="nav-link dropdown-toggle" href="#" id="masterDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Master
-                                </a>
-                                
-                                <div class="dropdown-menu" aria-labelledby="masterDropdownMenuLink">
-                                    <a class="dropdown-item{{ request()->is('master/brand') ? ' active' : '' }}" href="{{ route('master.brand') }}">Brand</a>
-                                    <a class="dropdown-item{{ request()->is('master/kategori') ? ' active' : '' }}" href="{{ route('master.category') }}">Kategori</a>
-                                    <a class="dropdown-item{{ request()->is('master/pemasok') ? ' active' : '' }}" href="{{ route('master.supplier') }}">Pemasok</a>
-                                    <a class="dropdown-item{{ request()->is('master/pelanggan') ? ' active' : '' }}" href="{{ route('master.customer') }}">Pelanggan</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item{{ request()->is('master/produk') ? ' active' : '' }}" href="{{ route('master.product') }}">Produk</a>                                    
-                                </div>
-                            </li>
+                                <li class="nav-item dropdown{{ request()->is('master/*') ? ' active' :'' }}">
+                                    <a class="nav-link dropdown-toggle" href="#" id="masterDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Master
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="masterDropdownMenuLink">
+                                        <a class="dropdown-item{{ request()->is('master/brand') ? ' active' : '' }}" href="{{ route('master.brand') }}">Brand</a>
+                                        <a class="dropdown-item{{ request()->is('master/kategori') ? ' active' : '' }}" href="{{ route('master.category') }}">Kategori</a>
+                                        <a class="dropdown-item{{ request()->is('master/pemasok') ? ' active' : '' }}" href="{{ route('master.supplier') }}">Pemasok</a>
+                                        <a class="dropdown-item{{ request()->is('master/pelanggan') ? ' active' : '' }}" href="{{ route('master.customer') }}">Pelanggan</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item{{ request()->is('master/produk') ? ' active' : '' }}" href="{{ route('master.product') }}">Produk</a>                                    
+                                    </div>
+                                </li>
 
-                            <li class="nav-item dropdown{{ request()->is('stok/*') ? ' active' : '' }}">
-                                <a class="nav-link dropdown-toggle" href="#" id="masterDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Stok
-                                </a>
-                                
-                                <div class="dropdown-menu" aria-labelledby="masterDropdownMenuLink">
-                                    <a class="dropdown-item{{ request()->is('stok/item') ? ' active' : '' }}" href="{{ route('stok.index') }}">Stok Barang</a>
-                                    <a class="dropdown-item{{ request()->is('stok/balance') ? ' active' : '' }}" href="{{ route('stok.balance') }}">Stok Saldo</a>
-                                </div>
-                            </li>
+                                <li class="nav-item dropdown{{ request()->is('stok/*') ? ' active' : '' }}">
+                                    <a class="nav-link dropdown-toggle" href="#" id="masterDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Stok
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="masterDropdownMenuLink">
+                                        <a class="dropdown-item{{ request()->is('stok/item') ? ' active' : '' }}" href="{{ route('stok.index') }}">Stok Barang</a>
+                                        <a class="dropdown-item{{ request()->is('stok/balance') ? ' active' : '' }}" href="{{ route('stok.balance') }}">Stok Saldo</a>
+                                    </div>
+                                </li>
 
-                            <li class="nav-item dropdown{{ request()->is('daily/*') ? ' active' :'' }}">
-                                <a class="nav-link dropdown-toggle" href="#" id="harianDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Harian
-                                </a>
-                                
-                                <div class="dropdown-menu" aria-labelledby="harianDropdownMenuLink">
-                                    <a class="dropdown-item{{ request()->is('daily/invoice') ? ' active' : '' }}" href="{{ route('daily.invoice') }}">Invoice</a>                                   
-                                    <a class="dropdown-item{{ request()->is('daily/balance') ? ' active' : '' }}" href="{{ route('daily.balance') }}">Invoice Pulsa</a>                                   
-                                    <hr>
-                                    <a class="dropdown-item{{ request()->is('daily/hutang') ? ' active' : '' }}" href="{{ route('daily.debt') }}">Hutang</a>                                   
-                                </div>
+                                <li class="nav-item dropdown{{ request()->is('daily/*') ? ' active' :'' }}">
+                                    <a class="nav-link dropdown-toggle" href="#" id="harianDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Harian
+                                    </a>
+                                    
+                                    <div class="dropdown-menu" aria-labelledby="harianDropdownMenuLink">
+                                        <a class="dropdown-item{{ request()->is('daily/invoice') ? ' active' : '' }}" href="{{ route('daily.invoice') }}">Invoice</a>                                   
+                                        <a class="dropdown-item{{ request()->is('daily/balance') ? ' active' : '' }}" href="{{ route('daily.balance') }}">Invoice Pulsa</a>                                   
+                                        <hr>
+                                        <a class="dropdown-item{{ request()->is('daily/hutang') ? ' active' : '' }}" href="{{ route('daily.debt') }}">Hutang</a>                                   
+                                    </div>
 
-                            </li>
+                                </li>
+                            @endrole
 
                             @role('SUPER ADMIN')
                                 <li class="nav-item{{ request()->is('credit-partners') ? ' active' : '' }}">
@@ -103,21 +105,32 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="harianDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ $partner->alias ? $partner->alias : $partner->nama_partner }}
                                     </a>
+
                                     @php
                                         $linkCustomer = 'credit-partner/partner=' . $partner->id .'/customer';
                                         $linkProposal = 'credit-partner/partner=' . $partner->id .'/proposal';
                                         $linkInvoice = 'credit-partner/partner=' . $partner->id .'/invoice';
+                                        $linkInvoiceClaim = 'credit-partner/partner=' . $partner->id .'/invoice-claim';
                                     @endphp
+                                    
                                     <div class="dropdown-menu" aria-labelledby="harianDropdownMenuLink">
                                         <a class="dropdown-item{{ request()->is($linkCustomer) ? ' active' : '' }}" href="{{ route('credit-partner.customer',['partner' => $partner->id]) }}">Pelanggan Kredit</a>                                   
                                         <a class="dropdown-item{{ request()->is($linkProposal) ? ' active' : '' }}" href="{{ route('credit-partner.proposal',['partner' => $partner->id]) }}">Pengajuan Kredit</a>                                   
-                                        <a class="dropdown-item{{ request()->is($linkInvoice) ? ' active' : '' }}" href="{{ route('credit-partner.invoice', ['partner' => $partner->id]) }}">Pengambilan Barang</a>                                 
+
+                                        @role('SUPER ADMIN|ADMIN|FRONT LINER|PROMOTOR')
+                                            <a class="dropdown-item{{ request()->is($linkInvoice) ? ' active' : '' }}" href="{{ route('credit-partner.invoice', ['partner' => $partner->id]) }}">Pengambilan Barang</a>
+                                        @endrole
+
+                                        @role('SUPER ADMIN')
+                                            <hr>
+                                                <a class="dropdown-item{{ request()->is($linkInvoiceClaim) ? ' active' : '' }}" href="{{ route('credit-partner.invoice-claim', ['partner' => $partner->id]) }}">Pengajuan Nota</a>
+                                            <hr>
+                                        @endrole
                                     </div>
                                 </li>
                             @endforeach
                                                         
                         </ul>
-
                         
                     @endauth
                     

@@ -8,9 +8,9 @@ class CreditPartner extends Model
 {
     protected $fillable = ['nama_mitra','alamat','alias'];
 
-    public function creditAplication()
+    public function creditApplication()
     {
-        return $this->hasMany('App\Model\CreditAplication');
+        return $this->hasMany('App\Model\CreditApplication');
     }
 
     public function user()

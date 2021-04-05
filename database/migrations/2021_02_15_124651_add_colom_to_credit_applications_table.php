@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColomToCreditAplicationsTable extends Migration
+class AddColomToCreditApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddColomToCreditAplicationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('credit_aplications', function (Blueprint $table) {
+        Schema::table('credit_applications', function (Blueprint $table) {
             $table->unsignedBigInteger('credit_partner_id');
 
             $table->foreign('credit_partner_id')->references('id')->on('credit_partners')->onUpdate('cascade')->onDelete('cascade');

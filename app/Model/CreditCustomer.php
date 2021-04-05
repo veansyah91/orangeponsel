@@ -10,7 +10,7 @@ class CreditCustomer extends Model
 
     public function creditAplication()
     {
-        return $this->hasMany('App\Model\CreditAplication');
+        return $this->hasMany('App\Model\CreditApplication');
     }
 
     public function outlet()

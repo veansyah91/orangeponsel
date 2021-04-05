@@ -1,4 +1,3 @@
-
 <div>
     <div class="container">
         <div class="row justify-content-center">
@@ -6,7 +5,7 @@
                 <div class="card">
 
                     <div class="card-header h3">
-                        Pengajuan Nota
+                        Pengajuan Kredit
                     </div>  
                 
                     @if (session()->has('success'))
@@ -69,7 +68,7 @@
                             </div>
                         </div>
                         
-                        <table class="table table-responsive">
+                        {{-- <table class="table table-responsive">
                             <thead>
                                 <tr class="align-middle">
                                     <th class="text-center align-middle">Nama Pelanggan Kredit</th>
@@ -152,13 +151,7 @@
                                     </tr>
                                 @endif
                             </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col d-flex justify-content-center">
-                                {{ $data->links() }}
-                            </div>
-                        </div>
-                        
+                        </table>                         --}}
                     </div>
                     @endif
                     
@@ -167,8 +160,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('livewire:load', function () {
-    })
-</script>
